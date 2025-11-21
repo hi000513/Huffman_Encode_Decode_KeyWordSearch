@@ -33,6 +33,12 @@ void HuffmanTree::BuildTree(const std::map<char, int>& frequencies) {
         pq.push(std::make_shared<HuffmanNode>(pair.first, pair.second));
     }
     
+    // Handle empty frequencies
+    if (pq.empty()) {
+        root_ = nullptr;
+        return;
+    }
+    
     // Build tree
     while (pq.size() > 1) {
         auto left = pq.top();
@@ -76,7 +82,10 @@ std::string HuffmanTree::Encode(const std::string& text) {
     
     std::string encoded;
     for (char c : text) {
-        encoded += codes_[c];
+        auto it = codes_.find(c);
+        if (it != codes_.end()) {
+            encoded += it->second;
+        }
     }
     return encoded;
 }
@@ -90,10 +99,18 @@ std::string HuffmanTree::Decode(const std::string& encodedText) {
     auto current = root_;
     
     for (char bit : encodedText) {
+        if (!current) {
+            break;
+        }
+        
         if (bit == '0') {
             current = current->left;
         } else {
             current = current->right;
+        }
+        
+        if (!current) {
+            break;
         }
         
         if (current->IsLeaf()) {
