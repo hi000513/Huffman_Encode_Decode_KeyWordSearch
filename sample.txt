@@ -1,0 +1,12 @@
+This is a sample text file for testing the Huffman encoder.
+The quick brown fox jumps over the lazy dog.
+Huffman coding is a compression algorithm that assigns variable-length codes to characters.
+Characters that appear more frequently get shorter codes.
+This helps reduce the overall size of the encoded text.
+
+You can use this file to test:
+1. HuffmanEncoder - to compress this text
+2. KeywordSearch - to search for keywords like "Huffman" or "compression"
+3. HuffmanDecoder - to decompress the encoded file (after implementing the decoder)
+
+Happy coding!
